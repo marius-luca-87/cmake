@@ -86,6 +86,7 @@
 #    include <cmext/memory>
 
 #    include "cmGlobalBorlandMakefileGenerator.h"
+#    include "cmGlobalFastbuildGenerator.h"
 #    include "cmGlobalJOMMakefileGenerator.h"
 #    include "cmGlobalNMakeMakefileGenerator.h"
 #    include "cmGlobalVisualStudio11Generator.h"
@@ -112,6 +113,7 @@
 #elif defined(CMAKE_BOOTSTRAP_NINJA)
 #  include "cmGlobalNinjaGenerator.h"
 #endif
+#include "cmGlobalFastbuildGenerator.h"
 
 #if !defined(CMAKE_BOOTSTRAP)
 #  include "cmExtraCodeBlocksGenerator.h"
@@ -2717,6 +2719,7 @@ void cmake::AddDefaultGenerators()
   this->Generators.push_back(cmGlobalUnixMakefileGenerator3::NewFactory());
   this->Generators.push_back(cmGlobalNinjaGenerator::NewFactory());
   this->Generators.push_back(cmGlobalNinjaMultiGenerator::NewFactory());
+  this->Generators.push_back(cmGlobalFastbuildGenerator::NewFactory());
 #elif defined(CMAKE_BOOTSTRAP_NINJA)
   this->Generators.push_back(cmGlobalNinjaGenerator::NewFactory());
 #elif defined(CMAKE_BOOTSTRAP_MAKEFILES)
