@@ -83,10 +83,7 @@ void cmFastbuildNormalTargetGenerator::DetectCompilerFlags(
   // Add include directory flags.
   std::string includeFlags = LocalCommonGenerator->GetIncludeFlags(
     includes, this->GeneratorTarget, language, configName,
-    false,
-    // full include paths for RC needed by cmcldeps
-    language == "RC" ? cmLocalGenerator::IncludePathStyle::Absolute
-                     : cmLocalGenerator::IncludePathStyle::Default);
+    false);
 
   LocalCommonGenerator->AppendFlags(compileFlags, includeFlags);
 

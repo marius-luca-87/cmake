@@ -84,7 +84,7 @@ bool cmGlobalFastbuildGenerator::FindMakeProgram(cmMakefile* mf)
                          "'\n"
                          "failed with:\n " +
                          error);
-      cmSystemTools::SetFatalErrorOccured();
+      cmSystemTools::SetFatalErrorOccurred();
       return false;
     }
     cmsys::RegularExpression versionRegex(R"(^FASTBuild v([0-9]+\.[0-9]+))");
@@ -105,7 +105,8 @@ std::vector<cmGlobalGenerator::GeneratedMakeCommand>
 cmGlobalFastbuildGenerator::GenerateBuildCommand(
   const std::string& makeProgram, const std::string& projectName,
   const std::string& projectDir, std::vector<std::string> const& targetNames,
-  const std::string& config, bool fast, int jobs, bool verbose,
+  const std::string& config, int jobs, bool verbose,
+  const cmBuildOptions& buildOptions,
   std::vector<std::string> const& makeOptions)
 {
   GeneratedMakeCommand makeCommand;
@@ -204,7 +205,7 @@ void cmGlobalFastbuildGenerator::Generate()
 
   this->WriteTargets(*this->BuildFileStream);
 
-  if (cmSystemTools::GetErrorOccuredFlag()) {
+  if (cmSystemTools::GetErrorOccurredFlag()) {
     this->BuildFileStream->setstate(std::ios::failbit);
   }
 
@@ -226,7 +227,7 @@ void cmGlobalFastbuildGenerator::Generate()
                "'\n"
                "failed with:\n ",
                error, "\n", output));
-    cmSystemTools::SetFatalErrorOccured();
+    cmSystemTools::SetFatalErrorOccurred();
   }
 #endif
 }
